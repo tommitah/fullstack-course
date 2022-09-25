@@ -8,19 +8,18 @@ const errorHandler = require('./middleware/errorHandler')
 
 const Person = require('./models/Person')
 
-// middleware
 morgan.token('body', req => JSON.stringify(req.body))
 
 app.use(express.static('build'))
 app.use(express.json())
 app.use(morgan(' :method :url :status :res[content-length] - :response-time ms :body'))
 app.use(cors())
-////// TODO:
-///// +++ restarting via nodemon still produces and error on 
-//// GET :3001/api/persons in the browser(frontend). npm start is fine
-// ---> there's still the Uncaught promise error whenever files are saved and nodemon is reloaded
-// No idea if this would affect deployment but might be something to look into, looks like it's
-// an axios related thing
+///////
+////// +++ restarting via nodemon still produces and error on 
+///// GET :3001/api/persons in the browser(frontend). npm start is fine
+//// ---> there's still the Uncaught promise error whenever files are saved and nodemon is reloaded
+/// No idea if this would/should affect deployment but might be something to look into, looks like it's an axios related thing
+// NOTE: looks like deployment is not affected by this.
 
 const generateId = persons => {
 	const maxId = persons.length > 0
@@ -98,8 +97,6 @@ app.delete('/api/persons/:id', (req, res, next) => {
 	})
 })
 
-// TODO: switch all the routes to utilize these (with next())
-// error handlers
 app.use(unknownEndpoint)
 app.use(errorHandler)
 

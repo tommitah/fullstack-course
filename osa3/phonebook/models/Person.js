@@ -1,4 +1,3 @@
-// import { connect, Schema, model } from 'mongoose'
 const mongoose = require('mongoose')
 
 const url = process.env.MONGODB_URI
@@ -28,9 +27,6 @@ const personSchema = new mongoose.Schema({
 	id: Number
 })
 
-// NOTE: this gets rid of the numerical increment ID and replaces it with the DB _id.
-// Might need a refactor somewhere if this is what we're doing
-// Or maybe it makes sense to have the numerical id's on the frontend side while the data is not in mongo?
 personSchema.set('toJSON', {
 	transform: (doc, obj) => {
 		obj.id = obj._id.toString()
