@@ -1,0 +1,7 @@
+su 25.9:
+aloitus 18:00
+lopetus 21:20
+
+
+
+total: 3h 20min
