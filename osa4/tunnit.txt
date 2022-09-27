@@ -1,8 +1,14 @@
 su 25.9:
-aloitus 18:00
-lopetus 21:20
+start 18:00
+stop  21:20
 
+ma 26.9:
+start 07:00
+stop  07:30
 
+ti 27.9:
+start 08:45
+stop  
 
 test
-total: 3h 20min
+total: 3h 50min

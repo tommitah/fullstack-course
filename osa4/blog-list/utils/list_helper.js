@@ -1,8 +1,17 @@
 const logger = require('../utils/logger')
-const sortBy = require('lodash/sortBy')
 
 const dummy = blogs => {
 	return 1
+}
+
+// can't take credit for this piece of code...
+// https://javascript.plainenglish.io/how-to-find-the-most-frequent-element-in-an-array-in-javascript-c85119dc78d2
+const mostFrequentElement = array => {
+	const hashmap = array.reduce((acc, val) => {
+		acc[val] = (acc[val] || 0) + 1
+		return acc
+	}, {})
+	return Object.keys(hashmap).reduce((a, b) => hashmap[a] > hashmap[b] ? a : b)
 }
 
 const totalLikes = blogs => {
@@ -32,26 +41,14 @@ const favouriteBlog = blogs => {
 const mostBlogs = blogs => {
 	const prunedBlogs = blogs.map(blog => {
 		const { _id, url, __v, likes, title, ...prunedBlog } = blog
-		return prunedBlog
+		return prunedBlog.author
 	})
-	logger.info('Pruned blogs: ', prunedBlogs)
 
-	// const sortedBlogs = sortBy(prunedBlogs, blog => blog.author)
-	// logger.info('Sorted blogs: ', sortedBlogs)
+	const mostFrequentAuthor = mostFrequentElement(prunedBlogs)
 
-	const hashmap = prunedBlogs.reduce((acc, val) => {
-		acc[val] = (acc[val] || 0) + 1
-		return acc
-	}, {})
+	const authorBlogs = blogs.filter(blog => blog.author === mostFrequentAuthor)
 
-	// This is still borked
-	// absolutely borked
-	const mostFrequentElement = () => {
-		return Object.keys(hashmap).reduce((a, b) => hashmap[a] > hashmap[b] ? a : b)
-	}
-	logger.info('Most frequent:', mostFrequentElement)
-
-	return -1
+	return { author: mostFrequentAuthor, blogs: authorBlogs.length }
 }
 
 module.exports = {
