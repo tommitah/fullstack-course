@@ -8,7 +8,14 @@ stop  07:30
 
 ti 27.9:
 start 08:45
-stop  
+stop  14:45
+
+start 21:50
+stop  22:55
+
+ke 28.9:
+start 14:00
+stop  16:15
 
 test
-total: 3h 50min
+total: 15h 10min
