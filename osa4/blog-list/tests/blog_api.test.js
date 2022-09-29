@@ -50,7 +50,8 @@ test('a valid blog can be added', async () => {
 		title: 'The intrigue surrounding Michael Jackson',
 		author: 'Dr. Bubilek',
 		url: 'https://google.com',
-		likes: 69
+		likes: 69,
+		user: '6333546516c5ed4deb20272e'
 	}
 
 	await api
@@ -69,7 +70,8 @@ test('a valid blog can be added', async () => {
 test('an invalid blog can not be added', async () => {
 	const newBlog = {
 		author: 'Brandon Sanderson',
-		likes: 999999
+		likes: 999999,
+		user: '6333546516c5ed4deb20272e'
 	}
 
 	await api
@@ -115,7 +117,8 @@ test('if likes are not given, it is initialized to zero', async () => {
 	const newBlog = {
 		title: 'The Name of the Wind',
 		author: 'Patrick Rothfuss',
-		url: 'https://localhost:3001'
+		url: 'https://localhost:3001',
+		user: '6333546516c5ed4deb20272e'
 	}
 
 	await api
@@ -134,13 +137,14 @@ test('if likes are not given, it is initialized to zero', async () => {
 
 test('blog without a title is not added', async () => {
 	const newBlog = {
-		author: 'Mie'
+		author: 'Mie',
+		user: '6333546516c5ed4deb20272e'
 	}
 
 	await api
 		.post('/api/blogs')
 		.send(newBlog)
-		.expect(400)
+		.expect(401)
 
 	const blogsAtEnd = await getBlogsJSON()
 	expect(blogsAtEnd).toHaveLength(testBlogs.length)
@@ -151,7 +155,8 @@ test('an existing blogs likes can be changed', async () => {
 		title: 'Muh blog',
 		author: 'Tommi Tahvanainen',
 		url: 'https://localhost:3000',
-		likes: 69
+		likes: 69,
+		user: '6333546516c5ed4deb20272e'
 	}
 
 	const originalBlog = await Blog.find({ title: 'Muh blog' })

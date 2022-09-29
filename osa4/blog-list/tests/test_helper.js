@@ -5,13 +5,15 @@ const testBlogs = [
 		title: 'Muh blog',
 		author: 'Tommi Tahvanainen',
 		url: 'https://localhost:3000',
-		likes: 420
+		likes: 420,
+		user: '6333546516c5ed4deb20272e'
 	},
 	{
 		title: 'Shite blog',
 		author: 'YOU',
 		url: 'https://localhost:3000',
-		likes: 0
+		likes: 0,
+		user: '6333546516c5ed4deb20272e'
 	},
 ]
 
