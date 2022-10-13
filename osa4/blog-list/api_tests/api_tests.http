@@ -8,7 +8,20 @@ get http://localhost:3003/api/users
 // from the POST /api/login for a user.
 post http://localhost:3003/api/blogs
 Content-Type: application/json
-Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRvbW1pdGFoIiwiaWQiOiI2MzMzNTQ2NTE2YzVlZDRkZWIyMDI3MmUiLCJpYXQiOjE2NjQzNjYyNTh9.lkCcLAMUamwKH9-DaoKSFzrtLrGGxjGNOk7LeI47dJw 
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRvbW1pdGFoIiwiaWQiOiI2MzM1NzUyNTIzMDBmZmE2Y2MyMGIwNDYiLCJpYXQiOjE2NjQ0NDc5OTQsImV4cCI6MTY2NDQ1MTU5NH0.m-cfyMv44B8R-IlEcQtb9ElNgjXYkWAforGGlUH2bw0
+
+{
+    "title": "The Way of Kings",
+    "author": "Brandon Sanderson",
+    "url": "https://coppermind.net/wiki/The_Way_of_Kings",
+    "likes": 1000000,
+    "user": "6333546516c5ed4deb20272e"
+}
+
+###
+post http://localhost:3003/api/blogs
+Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRvbW1pdGFoIiwiaWQiOiI2MzM1NzUyNTIzMDBmZmE2Y2MyMGIwNDYiLCJpYXQiOjE2NjQ0NDc5OTQsImV4cCI6MTY2NDQ1MTU5NH0.m-cfyMv44B8R-IlEcQtb9ElNgjXYkWAforGGlUH2bw0
 
 {
     "title": "Words of Radiance",
@@ -21,7 +34,7 @@ Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRvb
 ###
 post http://localhost:3003/api/blogs
 Content-Type: application/json
-Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRvbW1pdGFoIiwiaWQiOiI2MzMzNTQ2NTE2YzVlZDRkZWIyMDI3MmUiLCJpYXQiOjE2NjQzNjYyNTh9.lkCcLAMUamwKH9-DaoKSFzrtLrGGxjGNOk7LeI47dJw 
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRvbW1pdGFoIiwiaWQiOiI2MzM1NzUyNTIzMDBmZmE2Y2MyMGIwNDYiLCJpYXQiOjE2NjQ0NDc5OTQsImV4cCI6MTY2NDQ1MTU5NH0.m-cfyMv44B8R-IlEcQtb9ElNgjXYkWAforGGlUH2bw0
 
 {
     "title": "Oathbringer",
@@ -29,6 +42,17 @@ Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRvb
     "url": "https://coppermind.net/wiki/Oathbringer",
     "likes": 6000000,
     "user": "6333546516c5ed4deb20272e"
+}
+
+###
+get http://localhost:3003/api/users
+###
+post http://localhost:3003/api/users
+Content-Type: application/json
+
+{
+    "username": "tommitah",
+    "password": "smeghoidbond"
 }
 
 ###
@@ -41,7 +65,6 @@ Content-Type: application/json
 }
 
 ###
-// id 633440c59775c667f62b35a6
 post http://localhost:3003/api/users
 Content-Type: application/json
 
@@ -51,7 +74,6 @@ Content-Type: application/json
 }
 
 ###
-// token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImRqb21taWRhaCIsImlkIjoiNjMzNDQwYzU5Nzc1YzY2N2Y2MmIzNWE2IiwiaWF0IjoxNjY0MzY4OTIzLCJleHAiOjE2NjQzNzI1MjN9.fVsI1PjnJp0lCLnTnqnSYYnnyV7LGI9OGN2E1HSWEW0
 post http://localhost:3003/api/login
 Content-Type: application/json
 

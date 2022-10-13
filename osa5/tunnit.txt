@@ -4,6 +4,24 @@ stop  16:30
 
 to 29.9:
 start 12:00
-stop  
+stop  14:00
 
-total: 0h 15min
+pe 07.10:
+start 16:30
+stop  17:00
+
+ti 11.10:
+start 13:30
+stop  15:30
+
+start 19:30
+stop  20:30
+
+start 00:20
+stop  02:00
+
+ke 12.10:
+start 12:30
+stop  13:50
+
+total: 9h 15min
