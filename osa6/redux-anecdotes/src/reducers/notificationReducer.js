@@ -1,22 +1,21 @@
 import { createSlice } from '@reduxjs/toolkit'
 
+const initialState = {
+	message: '',
+	timeoutID: 0,
+	visible: false,
+}
+
 const notificationSlice = createSlice({
 	name: 'notification',
-	initialState: null,
+	initialState,
 	reducers: {
 		createNotification(state, action) {
-			// const notifications = [...state]
-			// notifications.push({
-			// 	content: action.payload,
-			// 	id: getId()
-			// })
-			// return notifications
-			return state = action.payload
+			clearTimeout(state.timeoutID)
+			return state = { ...action.payload }
 		},
 		removeNotification(state, action) {
-			// const updatedNotifications = [...state].filter(notification => notification.id !== action.payload)
-			// return updatedNotifications
-			return state = null
+			return state = initialState
 		}
 	}
 })
@@ -25,8 +24,8 @@ export const { createNotification, removeNotification } = notificationSlice.acti
 
 export const setNotification = (message, timeout) => {
 	return dispatch => {
-		dispatch(createNotification(message))
-		setTimeout(() => dispatch(removeNotification()), timeout * 1000)
+		const timeoutID = setTimeout(() => dispatch(removeNotification()), timeout * 1000)
+		dispatch(createNotification({ message, timeoutID, visible: true }))
 	}
 }
 
