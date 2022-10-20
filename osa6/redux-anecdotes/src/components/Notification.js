@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 
 const Notification = (props) => {
-	if (props.notifications === null) return null
+	if (!props.notifications.visible) return null
 
 	const style = {
 		border: 'solid',
@@ -18,8 +18,6 @@ const Notification = (props) => {
 }
 
 const mapStateToProps = state => {
-	if (!state.notifications.visible)
-		return { notifications: null }
 	return { notifications: state.notifications }
 }
 

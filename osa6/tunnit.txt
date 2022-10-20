@@ -31,6 +31,6 @@ stop	15:20
 
 to 20.10:
 start	14:00
-stop
+stop	16:30
 
-total:	10h 25min
+total:	12h 55min
