@@ -6,13 +6,17 @@ import qs from 'qs';
 //
 // eslint-disable-next-line @typescript-eslint/no-var-requires, @typescript-eslint/no-unsafe-assignment
 const queryType = require('query-types');
+import bodyParser from "body-parser";
 import { calculateBMI } from "./calculateBMI";
+import { calculateExercises } from "./exerciseCalculator";
+import { ExerciseInfo, RequestBody } from "./types";
 
 const app = express();
 
 // so nice to ignore errors...
 // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call
 app.use(queryType.middleware());
+app.use(bodyParser.json());
 app.set('query parser', (str: string) => qs.parse(str));
 
 app.get('/bmi', (req, res) => {
@@ -31,6 +35,16 @@ app.get('/bmi', (req, res) => {
 		bmi
 	};
 	res.status(200).json(result);
+});
+
+app.post('/exercises', (req: RequestBody<ExerciseInfo>, res) => {
+	console.log(req.body);
+	const exercises = req.body.daily_exercises;
+	const target = req.body.target;
+	if (exercises.some(value => typeof value !== 'number') || typeof target !== 'number')
+		res.status(400).json({ error: 'parameters missing' });
+
+	res.status(200).json(calculateExercises(exercises, target));
 });
 
 const PORT = 3002;
