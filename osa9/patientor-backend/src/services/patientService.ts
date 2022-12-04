@@ -1,5 +1,5 @@
 import patientsData from "../../data/patients.json";
-import { SecurePatientData } from "../types";
+import { Patient, SecurePatientData } from "../types";
 
 const getPatients = (): SecurePatientData[] => {
 	return patientsData.map(({ id, name, dateOfBirth, gender, occupation }) => ({
@@ -11,6 +11,13 @@ const getPatients = (): SecurePatientData[] => {
 	}));
 };
 
+const addPatient = (patient: Patient) => {
+	console.log('old data: ', patientsData);
+	console.log('new data: ', patient);
+	patientsData.push(patient);
+};
+
 export default {
 	getPatients,
+	addPatient
 };

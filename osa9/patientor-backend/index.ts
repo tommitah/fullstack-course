@@ -1,4 +1,4 @@
-import express from "express";
+import express, { NextFunction, Request, Response } from "express";
 import diagnosesRouter from "./src/routers/diagnosesRouter";
 import patientsRouter from "./src/routers/patientsRouter";
 
@@ -8,12 +8,21 @@ const cors = require('cors');
 const app = express();
 
 app.use(express.static('build'));
+app.use(express.json());
+app.use((req: Request, _res: Response, next: NextFunction) => {
+	console.log(`Method: ${req.method}`);
+	console.log(`Path: ${req.path}`);
+	console.log(`Body: ${JSON.stringify(req.body)}`);
+	console.log('---');
+	next();
+});
+
 // eslint-disable-next-line @typescript-eslint/no-unsafe-call
 app.use(cors());
 
 app.get('/api/ping', (_req, res) => {
 	console.log('pinggg');
-	res.send('pong');
+	res.status(200);
 });
 
 app.use('/api/diagnoses', diagnosesRouter);
