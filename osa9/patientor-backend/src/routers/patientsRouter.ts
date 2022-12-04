@@ -1,7 +1,8 @@
-import { Router } from "express";
+import { Response, Router } from "express";
 import patientService from "../services/patientService";
-import { Patient, RequestBody } from "../types";
+import { GenderEnum, Patient, RequestBody } from "../types";
 import { v1 as uuid } from 'uuid';
+import { body, validationResult } from 'express-validator';
 
 const patientsRouter = Router();
 
@@ -10,22 +11,34 @@ patientsRouter.get('/', (_req, res) => {
 	res.json(patients);
 });
 
-patientsRouter.post('/', (req: RequestBody<Patient>, res) => {
-	const id = uuid();
-	const body = req.body;
+patientsRouter.post('/',
+	[
+		body('name').exists().isString().notEmpty(),
+		body('dateOfBirth').exists().isString().notEmpty(),
+		body('ssn').exists().isString().notEmpty(),
+		body('gender').exists().custom(type => type in GenderEnum),
+		body('occupation').exists().isString().notEmpty(),
+	],
+	(req: RequestBody<Patient>, res: Response) => {
+		const errors = validationResult(req);
+		if (!errors.isEmpty())
+			throw Error('oops, looks like you provided shite data!');
 
-	const newPatient: Patient = {
-		id,
-		name: body.name,
-		dateOfBirth: body.dateOfBirth,
-		ssn: body.ssn,
-		gender: body.gender,
-		occupation: body.occupation
-	};
+		const id = uuid();
+		const body = req.body;
 
-	patientService.addPatient(newPatient)
+		const newPatient: Patient = {
+			id,
+			name: body.name,
+			dateOfBirth: body.dateOfBirth,
+			ssn: body.ssn,
+			gender: body.gender,
+			occupation: body.occupation
+		};
 
-	res.status(200).json(newPatient);
-});
+		patientService.addPatient(newPatient);
+
+		res.status(200).json(newPatient);
+	});
 
 export default patientsRouter;
