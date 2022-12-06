@@ -1,4 +1,5 @@
 import { Request } from "express";
+import { ValidationError } from "express-validator";
 
 
 // These might change
@@ -12,9 +13,9 @@ export interface Diagnose {
 export type RequestBody<T> = Request<{}, {}, T>;
 
 export enum GenderEnum {
-	Male = 'male',
-	Female = 'female',
-	Other = 'other'
+	MALE = 'male',
+	FEMALE = 'female',
+	OTHER = 'other'
 }
 
 export interface Patient {
@@ -27,3 +28,15 @@ export interface Patient {
 }
 
 export type SecurePatientData = Omit<Patient, 'ssn'>;
+
+export class RouteError {
+	msg!: string;
+	record!: Record<string, ValidationError>;
+	statusCode!: number;
+
+	constructor(msg: string, record: Record<string, ValidationError> = {}, statusCode = 500) {
+		this.msg = msg;
+		this.record = record;
+		this.statusCode = statusCode;
+	}
+}

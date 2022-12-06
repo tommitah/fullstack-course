@@ -1,6 +1,6 @@
 import { Response, Router } from "express";
 import patientService from "../services/patientService";
-import { GenderEnum, Patient, RequestBody } from "../types";
+import { GenderEnum, Patient, RequestBody, RouteError } from "../types";
 import { v1 as uuid } from 'uuid';
 import { body, validationResult } from 'express-validator';
 
@@ -16,13 +16,13 @@ patientsRouter.post('/',
 		body('name').exists().isString().notEmpty(),
 		body('dateOfBirth').exists().isString().notEmpty(),
 		body('ssn').exists().isString().notEmpty(),
-		body('gender').exists().custom(type => type in GenderEnum),
+		body('gender').exists().custom((type: GenderEnum) => Object.values(GenderEnum).includes(type)),
 		body('occupation').exists().isString().notEmpty(),
 	],
 	(req: RequestBody<Patient>, res: Response) => {
 		const errors = validationResult(req);
 		if (!errors.isEmpty())
-			throw Error('oops, looks like you provided shite data!');
+			throw new RouteError('oops, looks like you provided shite data!', errors.mapped(), 400);
 
 		const id = uuid();
 		const body = req.body;
